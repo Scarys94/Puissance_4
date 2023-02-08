@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class Game:
     def __init__(self, master):
@@ -71,25 +72,22 @@ class Game:
         row_ = row
         for i in range(column, -1, -1):
             if row_ < 0:
-                break
+                return
             if self.grid[i][row_] == value:
                 count += 1
                 if count == 4:
                     return True
                 row_ -= 1
-            else:
-                break
         row_ = row + 1
         for i in range(column+1, 7):
                     if row_ >= 6:
-                        break
+                        return
         if self.grid[i][row_] == value:
             count += 1
             if count == 4:
                 return True
             row_ += 1
-        else:
-            break
+
             
 
         # check diagonal (top-right to bottom-left)
@@ -97,25 +95,22 @@ class Game:
         row_ = row
         for i in range(column, 7):
             if row_ < 0:
-                break
+                return
             if self.grid[i][row_] == value:
                 count += 1
                 if count == 4:
                     return True
                 row_ -= 1
-            else:
-                break
+
         row_ = row + 1
         for i in range(column-1, -1, -1):
             if row_ >= 6:
-                break
+                return
             if self.grid[i][row_] == value:
                 count += 1
                 if count == 4:
                     return True
                 row_ += 1
-            else:
-                break
 
         return False
 
@@ -127,11 +122,11 @@ class Game:
             winner = "Rouge"
         else:
             winner = "Bleu"
-        tk.messagebox.showinfo("Gagnant", "Le joueur {} a gagné!".format(winner))
+        messagebox.showinfo("Gagnant", "Le joueur {} a gagné!".format(winner))
         self.master.quit()
 
     def show_tie(self):
-        tk.messagebox.showinfo("Match nul", "Match nul!")
+        messagebox.showinfo("Match nul", "Match nul!")
         self.master.quit()
 
 if __name__ == "__main__":
